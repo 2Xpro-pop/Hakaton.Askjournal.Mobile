@@ -1,0 +1,17 @@
+﻿@page "/{*Path}"
+
+
+<PostBuilder Root=@(PostBuilder.Document.RootElement.GetProperty("Main/"+Path)) />
+
+
+@code{
+    [Parameter]
+    public string Path { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Path = string.IsNullOrWhiteSpace(Path) ? $"dobot/dobot1" : Path;
+        var test = PostBuilder.Document.RootElement.GetProperty("Main/" + Path);
+    }
+
+}

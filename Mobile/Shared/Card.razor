@@ -1,0 +1,15 @@
+﻿<div class="row justify-content-center">
+    @foreach(var data in Data.GetProperty("cards").EnumerateArray())
+    {
+        <div class="col-7 p-4 m-1 text-center" style="background-color:#E3EDF4">
+            <h5>@data.GetProperty("header").GetString()</h5>
+            <p style="font-size: 12px">@data.GetProperty("text").GetString()</p>
+        </div>
+    }
+    
+</div>
+
+@code {
+    [Parameter]
+    public JsonElement Data { get; set; }
+}

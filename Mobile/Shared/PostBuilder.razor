@@ -1,0 +1,34 @@
+﻿<PageTitle>@Root.GetProperty("header").GetString()</PageTitle>
+
+@{
+    var post = @Root.GetProperty("post").GetString();
+    var json = JsonDocument.Parse(post).RootElement;
+
+    var blocks = json.GetProperty("blocks");
+    
+}
+
+@foreach(var block in blocks.EnumerateArray())
+{
+    if (block.GetProperty("type").GetString() == "header")
+    {
+        <Header Data=@(block.GetProperty("data")) />
+    }
+
+    if (block.GetProperty("type").GetString() == "paragraph")
+    {
+        <Paragraph Data=@(block.GetProperty("data")) />
+    }
+
+    if (block.GetProperty("type").GetString() == "bigCards")
+    {
+        <Card Data=@(block.GetProperty("data")) />
+    }
+}
+
+@code {
+    public static readonly JsonDocument Document = JsonDocument.Parse(Posts.Data);
+
+    [Parameter]
+    public JsonElement Root { get; set; }
+}

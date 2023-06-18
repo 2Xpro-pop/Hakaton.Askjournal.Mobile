@@ -1,0 +1,8 @@
+﻿<h2>
+    @((MarkupString)Data.GetProperty("text").GetString())
+</h2>
+
+@code {
+    [Parameter]
+    public JsonElement Data { get; set; }
+}
